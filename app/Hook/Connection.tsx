@@ -55,7 +55,7 @@ export function ProfileForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      host: "h1ee611a.ala.cn-hangzhou.emqxsl.cn",
+      host: process.env.Host,
       port: 8084,
       clientId: "emqx_next_1",
       username: "quinn",
