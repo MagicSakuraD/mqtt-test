@@ -59,7 +59,7 @@ export function ProfileForm() {
       port: 8084,
       clientId: "emqx_next_1",
       username: "quinn",
-      password: "emqx201227",
+      password: process.env.MY_PASS,
     },
   });
 
