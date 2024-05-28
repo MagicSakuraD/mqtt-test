@@ -22,6 +22,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/components/ui/use-toast";
+
 import { IClientSubscribeOptions } from "mqtt";
 
 const formSchema = z.object({
@@ -40,6 +42,7 @@ interface ProfileFormProps {
 
 export function ProfileForm({ publish }: ProfileFormProps) {
   // 1. Define your form.
+  const { toast } = useToast();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -54,6 +57,9 @@ export function ProfileForm({ publish }: ProfileFormProps) {
     // ✅ This will be type-safe and validated.
     console.log(values);
     publish(values as any);
+    toast({
+      description: "发布成功📢",
+    });
   }
 
   return (

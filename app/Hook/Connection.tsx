@@ -55,11 +55,13 @@ export function ProfileForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      host: process.env.Host,
-      port: 8084,
+      // host: process.env.Host,
+      host: "192.168.2.108",
+      port: 8083,
       clientId: "emqx_next_1",
-      username: "quinn",
-      password: process.env.MY_PASS,
+      username: "chenkun22ddd",
+      // password: process.env.MY_PASS,
+      password: "cyber22022",
     },
   });
 
@@ -68,7 +70,7 @@ export function ProfileForm() {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     const { host, port, clientId, username, password } = values;
-    const url: string = `wss://${host}:${port}/mqtt`;
+    const url: string = `ws:${host}:${port}/mqtt`;
 
     const options = {
       clientId,
@@ -86,7 +88,7 @@ export function ProfileForm() {
     };
     mqttConnect(url, options);
     toast({
-      description: "Your message has been sent.",
+      description: "连接成功✅",
     });
   }
 
@@ -123,6 +125,9 @@ export function ProfileForm() {
         client.end(false, () => {
           setConnectStatus("Connect");
           console.log("disconnected successfully");
+          toast({
+            description: "断开连接❌",
+          });
         });
       } catch (error) {
         console.log("disconnect error:", error);
@@ -264,12 +269,13 @@ export function ProfileForm() {
               <div className="flex justify-between">
                 <Button type="submit">连接</Button>
                 <Separator orientation="vertical" />
-
-                <Button onClick={onDisconnect}>断开</Button>
               </div>
             </form>
           </Form>
         </CardContent>
+        <CardFooter>
+          <Button onClick={onDisconnect}>断开</Button>
+        </CardFooter>
       </Card>
 
       <Subscriber sub={mqttSub} showUnsub={isSubed} unSub={mqttUnSub as any} />

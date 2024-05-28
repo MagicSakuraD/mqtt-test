@@ -22,6 +22,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { useToast } from "@/components/ui/use-toast";
 
 const formSchema = z.object({
   topic: z.string().min(2).max(50),
@@ -49,6 +50,7 @@ export function ProfileForm({ sub_form, showUnsub, unSub }: ProfileFormProps) {
       qos: 0,
     },
   });
+  const { toast } = useToast();
 
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
@@ -58,11 +60,17 @@ export function ProfileForm({ sub_form, showUnsub, unSub }: ProfileFormProps) {
     sub_form(values as any);
     console.log(sub_form);
     console.log(sub_form(values as any));
+    toast({
+      description: "订阅成功🔔",
+    });
   }
 
   const handleUnsub = () => {
     const values = form.getValues();
     unSub(values as any);
+    toast({
+      description: "取消订阅🔕",
+    });
   };
 
   return (
