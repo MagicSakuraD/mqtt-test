@@ -20,6 +20,11 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
+## SHOWCASE
+
+A simple MQTT test web page, you can use it to test your MQTT server.
+![MQTT Test Image](https://raw.githubusercontent.com/MagicSakuraD/img/main/img/mqtt_test.png)
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
